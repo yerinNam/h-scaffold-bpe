@@ -3,13 +3,6 @@
 논문의 BPE, Scaffold-BPE와 제안한 2-level Hierarchical Scaffold-BPE를 같은
 byte-level/GPT-2 pretokenization 조건에서 비교하는 재현 실험 코드입니다.
 
-## 공식 코드 상태
-
-2026-09-28 기준 저자 [공식 저장소](https://github.com/Aaron-LHR/Scaffold-BPE)는
-`Our code will be released to the public soon`이라고만 명시하며 구현을 공개하지
-않았습니다. 이 프로젝트는 [AAAI 논문의 Algorithm 1/2](https://ojs.aaai.org/index.php/AAAI/article/download/34633/36788)를
-독립적으로 구현합니다.
-
 ## 고정한 H-Scaffold 의미
 
 학습 중 merge 직후 child token의 잔여 빈도 `f(a)`를 다음 queue head 빈도와
