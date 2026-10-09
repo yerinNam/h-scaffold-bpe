@@ -91,6 +91,23 @@ def _metadata(binary_path: str | Path) -> dict:
     return json.loads(path.with_suffix(path.suffix + ".json").read_text(encoding="utf-8"))
 
 
+def next_token_loss(
+    model: LlamaForCausalLM, batch: torch.Tensor, reduction: str = "mean"
+) -> torch.Tensor:
+    """Cross-entropy of predicting batch[:, t+1] from batch[:, :t+1], for a (B, L+1) batch.
+
+    Do NOT call ``model(input_ids=batch[:, :-1], labels=batch[:, 1:])``: HuggingFace's causal-LM
+    loss shifts ``labels`` internally, so already-shifted labels train the model to predict the token
+    TWO steps ahead (it then looks "untrained" under a correct next-token evaluation).
+    The loss is computed explicitly here so that training and `evaluate` use the same alignment.
+    """
+    inputs, labels = batch[:, :-1], batch[:, 1:]
+    logits = model(input_ids=inputs).logits
+    return torch.nn.functional.cross_entropy(
+        logits.float().reshape(-1, logits.size(-1)), labels.reshape(-1), reduction=reduction
+    )
+
+
 class TokenStream:
     def __init__(self, path: str | Path, sequence_length: int):
         self.path = Path(path)
@@ -129,14 +146,10 @@ def evaluate(
         batch_count = min(batch_count, max_batches)
     for batch_index in range(batch_count):
         batch = stream.batch(batch_index * batch_size, batch_size, device)
-        inputs, labels = batch[:, :-1], batch[:, 1:]
         with torch.autocast(device_type="cuda", dtype=torch.bfloat16):
-            logits = model(input_ids=inputs).logits
-            loss = torch.nn.functional.cross_entropy(
-                logits.reshape(-1, logits.size(-1)), labels.reshape(-1), reduction="sum"
-            )
+            loss = next_token_loss(model, batch, reduction="sum")
         total_nll += float(loss)
-        total_targets += labels.numel()
+        total_targets += batch[:, 1:].numel()
     nll_per_token = total_nll / max(total_targets, 1)
     represented_bytes = stream.meta["source_bytes"] * total_targets / max(stream.meta["tokens"], 1)
     return {
@@ -210,9 +223,8 @@ def train(args: argparse.Namespace) -> dict:
             for _ in range(args.grad_accum):
                 batch = train_stream.batch(consumed_sequences, args.micro_batch_size, device)
                 consumed_sequences += args.micro_batch_size
-                inputs, labels = batch[:, :-1], batch[:, 1:]
                 with torch.autocast(device_type="cuda", dtype=torch.bfloat16):
-                    loss = model(input_ids=inputs, labels=labels).loss / args.grad_accum
+                    loss = next_token_loss(model, batch) / args.grad_accum
                 loss.backward()
                 accumulated_loss += float(loss.detach())
             gradient_norm = float(clip_grad_norm_(model.parameters(), args.max_grad_norm))
