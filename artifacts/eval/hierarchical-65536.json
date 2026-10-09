@@ -1,0 +1,49 @@
+{
+  "model": "/home/jovyan/main-workspace/yerin/tokenizer/artifacts/tokenizers/hierarchical-65536.json",
+  "variant": "hierarchical",
+  "target_vocab_size": 65536,
+  "expanded_vocab_size": 70425,
+  "level_counts": {
+    "0": 65536,
+    "1": 901,
+    "2": 3988
+  },
+  "tokenizer_training_seconds": 721.5447124112397,
+  "domains": [
+    {
+      "path": "/home/jovyan/main-workspace/yerin/tokenizer/data/eval/wikitext103_test.txt",
+      "words": 244335,
+      "tokens": 271030,
+      "bytes": 1281874,
+      "fertility": 1.109255734954059,
+      "bytes_per_token": 4.729638785374313,
+      "tokens_per_second": 717422.8945795213,
+      "megabytes_per_second": 3.393151147718811,
+      "elapsed_seconds": 0.37778275832533836
+    },
+    {
+      "path": "/home/jovyan/main-workspace/yerin/tokenizer/data/eval/wmt17_de_en_test_en.txt",
+      "words": 66180,
+      "tokens": 73088,
+      "bytes": 336817,
+      "fertility": 1.104381988516168,
+      "bytes_per_token": 4.608376204028021,
+      "tokens_per_second": 547419.5919664571,
+      "megabytes_per_second": 2.5227154212369496,
+      "elapsed_seconds": 0.13351367227733135
+    },
+    {
+      "path": "/home/jovyan/main-workspace/yerin/tokenizer/data/eval/blimp_all.txt",
+      "words": 1186095,
+      "tokens": 1406113,
+      "bytes": 6370913,
+      "fertility": 1.1854977889629414,
+      "bytes_per_token": 4.5308684294932196,
+      "tokens_per_second": 771246.5981159109,
+      "megabytes_per_second": 3.4944168627574257,
+      "elapsed_seconds": 1.823169143870473
+    }
+  ],
+  "fertility_mean": 1.1330451708110563,
+  "fertility_population_std": 0.037142933058890444
+}

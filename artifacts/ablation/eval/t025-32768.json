@@ -1,0 +1,49 @@
+{
+  "model": "artifacts/ablation/tokenizers/t025/hierarchical-32768.json",
+  "variant": "hierarchical",
+  "target_vocab_size": 32768,
+  "expanded_vocab_size": 35369,
+  "level_counts": {
+    "0": 32768,
+    "1": 1279,
+    "2": 1322
+  },
+  "tokenizer_training_seconds": 688.6641256753355,
+  "domains": [
+    {
+      "path": "data/eval/wikitext103_test.txt",
+      "words": 244335,
+      "tokens": 283602,
+      "bytes": 1281874,
+      "fertility": 1.1607096813800724,
+      "bytes_per_token": 4.519975176479715,
+      "tokens_per_second": 884670.5603867603,
+      "megabytes_per_second": 3.9986889723105548,
+      "elapsed_seconds": 0.32057357020676136
+    },
+    {
+      "path": "data/eval/wmt17_de_en_test_en.txt",
+      "words": 66180,
+      "tokens": 76094,
+      "bytes": 336817,
+      "fertility": 1.1498035660320338,
+      "bytes_per_token": 4.4263279627828735,
+      "tokens_per_second": 778154.7505722399,
+      "megabytes_per_second": 3.4443681318302377,
+      "elapsed_seconds": 0.09778774715960026
+    },
+    {
+      "path": "data/eval/blimp_all.txt",
+      "words": 1186095,
+      "tokens": 1526538,
+      "bytes": 6370913,
+      "fertility": 1.2870284420725153,
+      "bytes_per_token": 4.1734388531435185,
+      "tokens_per_second": 840950.6484071594,
+      "megabytes_per_second": 3.509656109638673,
+      "elapsed_seconds": 1.8152527771890163
+    }
+  ],
+  "fertility_mean": 1.1991805631615404,
+  "fertility_population_std": 0.062277193310040085
+}

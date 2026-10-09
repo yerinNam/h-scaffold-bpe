@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>H-Scaffold-BPE 구현 방법론</title>
+<style>
+:root{--ink:#172738;--muted:#536578;--line:#dce4eb;--accent:#126d76;--bg:#f3f6f8;--l0:#176552;--l1:#a06b10;--l2:#9a486c}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Noto Sans KR","Malgun Gothic",sans-serif;line-height:1.8}header{background:#142b3b;color:#fff;padding:64px max(24px,calc((100vw - 1100px)/2)) 48px}header p{color:#cedce7;max-width:850px}.eyebrow{font-size:13px;letter-spacing:.12em;color:#83d6d3}h1{font-size:clamp(30px,5vw,48px);line-height:1.25;margin:14px 0 22px}h2{font-size:26px;margin:0 0 22px;line-height:1.4}h3{font-size:19px;margin:28px 0 12px}p{margin:12px 0}a{color:var(--accent);text-underline-offset:3px}header a{color:#a6e4e1}main{max-width:1148px;margin:auto;padding:28px 24px 70px}nav,section{background:#fff;border:1px solid var(--line);border-radius:14px;padding:30px;margin:0 0 24px}nav ol{columns:2;padding-left:23px;margin:10px 0}nav li{padding:3px 0}section{scroll-margin-top:20px}.lead{font-size:19px}.note,.caution{border-left:4px solid var(--accent);background:#edf7f7;padding:16px 20px;margin:20px 0}.caution{border-color:#ba8122;background:#fff7e7}.muted,.source{color:var(--muted);font-size:14px}.tag{display:inline-block;padding:2px 9px;border-radius:5px;font-size:13px;background:#e8f1f4;margin-right:5px}.l0{color:var(--l0)}.l1{color:var(--l1)}.l2{color:var(--l2)}table{border-collapse:collapse;width:100%;font-size:15px}th,td{border-bottom:1px solid var(--line);padding:13px 15px;text-align:left;vertical-align:top}th{background:#edf2f6} .table-wrap{overflow-x:auto}code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;background:#eef2f5;padding:2px 5px;border-radius:4px;font-size:.9em}pre{background:#182b3a;color:#e6f0f6;padding:22px;border-radius:10px;overflow-x:auto;line-height:1.65;font-size:14px}pre code{background:none;padding:0;color:inherit}.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:24px 0}.step{padding:18px 13px;border:1px solid #c6dedf;background:#f0f8f8;border-radius:9px}.step b{display:block;margin-bottom:9px}.step span{font-size:14px}.formula{font-size:21px;text-align:center;background:#f2f6fa;padding:20px;border-radius:8px}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.card{border:1px solid var(--line);border-radius:10px;padding:18px}.card h3{margin-top:0}li{margin:6px 0}.interactive{padding:22px;background:#f1f6fa;border-radius:10px}.controls{display:flex;flex-wrap:wrap;gap:18px}.controls label{display:block}input{font:inherit;width:140px;padding:7px;border:1px solid #a9bbc9;border-radius:5px}output{display:block;margin-top:18px;font-weight:700}footer{text-align:center;color:var(--muted);padding:0 24px 35px;font-size:13px}@media(max-width:760px){nav ol{columns:1}.flow,.cards{grid-template-columns:1fr}section,nav{padding:22px}main{padding:20px 12px}th,td{min-width:130px}h2{font-size:23px}}@media print{body{background:#fff;font-size:10pt}header{padding:20px;background:#fff;color:#172738}header p,.eyebrow{color:#536578}main{max-width:none;padding:0}section,nav{border:0;border-radius:0;padding:15px 0;break-inside:auto}h2,h3{break-after:avoid}pre,.card,.note,.caution,tr{break-inside:avoid}nav,.interactive{display:none}a{color:inherit}footer{padding:10px}}
+</style>
+</head>
+<body>
+<header>
+<div class="eyebrow">IMPLEMENTATION NOTE · 2026-10-07</div>
+<h1>H-Scaffold-BPE<br>구현 방법론</h1>
+<p class="lead">희귀한 중간 토큰을 두 단계로 구분하고, L2 분해 이후 다시 병합할 기회를 주는 계층형 Scaffold-BPE의 현재 구현을 설명합니다.</p>
+<p>대상: <code>yerin/tokenizer</code>의 <code>hierarchical</code> variant. 논문에서 가져온 원리, 팀이 추가한 설계, 실제 코드의 처리 범위를 구분합니다. 성능 개선의 인과를 증명하는 문서가 아니라 구현을 재현하고 검토하기 위한 문서입니다.</p>
+</header>
+<main>
+<nav aria-label="목차"><strong>문서 구성</strong><ol>
+<li><a href="#overview">핵심 아이디어와 논문과의 차이</a></li><li><a href="#representation">토큰·빈도·자료구조</a></li><li><a href="#classification">L0/L1/L2 판정 규칙</a></li><li><a href="#training">학습 알고리즘과 상태 전이</a></li><li><a href="#encoding">인코딩의 다섯 단계</a></li><li><a href="#demolish">분해 알고리즘의 정확한 의미</a></li><li><a href="#remerge">재병합 순위와 주변 탐색 범위</a></li><li><a href="#example">단계별 예시</a></li><li><a href="#validation">검증 범위와 미확정 사항</a></li><li><a href="#sources">코드·논문 참조</a></li>
+</ol></nav>
+<section id="overview">
+<h2>01 · 핵심 아이디어와 논문과의 차이</h2>
+<p>BPE는 자주 등장하는 인접 토큰 쌍을 반복해서 합칩니다. 어떤 중간 토큰은 더 긴 토큰을 만드는 데 유용하지만, 병합이 진행된 뒤에는 독립적으로 거의 남지 않을 수 있습니다. Scaffold-BPE는 이런 중간 토큰을 병합용 어휘에는 유지하되, 최종 모델 입력에서는 분해하여 제거합니다.</p>
+<p>원 논문은 일반 토큰과 scaffold 토큰을 구분합니다. 학습에서는 병합 후 자식 토큰의 잔여 빈도를 다음 큐 헤드의 빈도와 비교하고, 인코딩에서는 전체 확장 어휘를 사용한 병합 후 남은 scaffold를 일반 토큰으로 분해합니다. <a href="https://ojs.aaai.org/index.php/AAAI/article/download/34633/36788">논문 Algorithm 1·2</a></p>
+<div class="note"><strong>H-Scaffold의 추가 설계:</strong> scaffold를 L1과 L2로 나누는 <code>0.5 × f(Qhead)</code> 경계, L2를 먼저 분해하는 절차, 그 이후 L0/L1만 허용하는 재병합은 이 프로젝트에서 추가한 규칙입니다. 원 논문의 규칙으로 인용하면 안 됩니다.</div>
+<div class="table-wrap"><table><thead><tr><th>항목</th><th>Scaffold-BPE 논문</th><th>현재 H-Scaffold 구현</th></tr></thead><tbody>
+<tr><td>토큰 구분</td><td>일반 / scaffold</td><td>L0 / L1 / L2</td></tr>
+<tr><td>scaffold 판정</td><td>잔여 빈도 &lt; 큐 헤드 빈도</td><td>같은 기준을 바탕으로 scaffold를 0.5 경계로 추가 구분</td></tr>
+<tr><td>인코딩</td><td>전체 병합 → scaffold 분해</td><td>전체 병합 → L2 분해 → 제한된 재병합 → L1 분해</td></tr>
+<tr><td>최종 모델 입력</td><td>일반 토큰만</td><td>L0만</td></tr>
+</tbody></table></div>
+<p>설계 의도는 잔여 빈도가 더 낮은 L2를 먼저 해체하여 다른 이웃과 결합할 기회를 만들면서, L1은 두 번째 병합까지 중간 구성요소로 사용할 수 있게 하는 것입니다. 이것이 반드시 토큰 수 감소나 모델 성능 향상으로 이어진다는 보장은 없습니다.</p>
+<p class="source">근거: <a href="../README.md">README의 “고정한 H-Scaffold 의미”</a>, <a href="../src/hscaffold_bpe/tokenizer.py">tokenizer.py</a>.</p>
+</section>
+<section id="representation">
+<h2>02 · 토큰·빈도·자료구조</h2>
+<div class="cards"><div class="card"><h3 class="l0">L0 · 최종 어휘</h3><p>모델이 입력받는 토큰입니다. 목표 vocabulary 크기는 L0 개수로 계산합니다. 기본 256개 byte와 특수 토큰도 여기에 포함됩니다.</p></div><div class="card"><h3 class="l1">L1 · 중간 scaffold</h3><p>첫 번째 병합과 두 번째 병합에 사용할 수 있습니다. 마지막 분해 단계에서 제거됩니다.</p></div><div class="card"><h3 class="l2">L2 · 먼저 분해할 scaffold</h3><p>첫 번째 병합에는 참여합니다. 그 결과에 남아 있으면 L0/L1 조각으로 분해하며, 두 번째 병합에서는 L2를 생성할 수 없습니다.</p></div></div>
+<p>텍스트는 GPT-2 정규식으로 pretoken을 나누고, 각 조각을 UTF-8 bytes로 표현합니다. pretoken은 공백 기준 단어와 동일하지 않으며, 문자·숫자·기호·공백과 축약형 패턴으로 구분되는 단위입니다.</p>
+<div class="table-wrap"><table><thead><tr><th>자료구조 / 기호</th><th>의미</th></tr></thead><tbody>
+<tr><td><code>tokens[id]</code></td><td>내부 토큰 ID에 대응하는 byte 문자열.</td></tr>
+<tr><td><code>levels[id]</code></td><td>현재 L0/L1/L2 상태. 저장된 최종 상태를 인코딩에 사용합니다.</td></tr>
+<tr><td><code>token_counts[t]</code> / f(t)</td><td>현재 병합된 학습 시퀀스에서 토큰 t가 남아 있는 횟수. pretoken 출현 빈도로 가중합니다. 원문 부분 문자열의 전체 등장 횟수가 아닙니다.</td></tr>
+<tr><td><code>pair_counts[(a,b)]</code></td><td>현재 시퀀스의 인접 쌍 빈도. 학습 병합 후보의 우선순위에 사용합니다.</td></tr>
+<tr><td><code>Q</code></td><td>빈도 우선 힙. 병합할 쌍과 재활성화를 기다리는 scaffold 토큰을 함께 저장합니다.</td></tr>
+<tr><td><code>f(Qhead)</code></td><td>오래된 힙 항목을 제외한, 현재 유효한 최상위 항목의 빈도. 반드시 쌍의 빈도만을 뜻하지는 않습니다.</td></tr>
+<tr><td><code>merges</code></td><td>학습 중 기록한 병합 목록. Python 인코딩의 병합 순위는 이 목록의 순서입니다.</td></tr>
+<tr><td><code>parents[t]</code></td><td>t를 구성한 자식 쌍의 목록. 분해 시 따라가는 경로이며 여러 대안이 있을 수 있습니다.</td></tr>
+</tbody></table></div>
+<p>확장 어휘는 L0+L1+L2 전체입니다. 최종 모델 ID는 정렬된 L0 내부 ID에 연속 번호를 다시 부여하여 만듭니다. 따라서 <strong>내부 토큰 ID와 모델 입력 ID는 구분</strong>해야 합니다.</p>
+<p class="source">근거: pretokenize.py:12–29, trainer.py:16–95, model.py:29–35, tokenizer.py:15–20 및 148–165.</p>
+</section>
+<section id="classification">
+<h2>03 · L0/L1/L2 판정 규칙</h2>
+<p>병합 <code>(a,b) → t</code>를 실제 시퀀스에 적용한 뒤, 소비된 a와 b의 빈도를 차감합니다. 이때의 잔여 빈도와 갱신된 큐 헤드 빈도를 비교합니다. 아래 식은 <strong>검사 대상인 L0 자식 토큰</strong>에 적용되는 분류 규칙입니다.</p>
+<div class="formula">q = f(Qhead), r = f(child), α = 0.5</div>
+<div class="table-wrap"><table><thead><tr><th>조건</th><th>결과</th><th>q = 100 예시</th></tr></thead><tbody>
+<tr><td>r ≥ q</td><td class="l0">L0 유지</td><td>r = 100, 120</td></tr><tr><td>0.5q ≤ r &lt; q</td><td class="l1">L1로 변경</td><td>r = 50, 75, 99</td></tr><tr><td>r &lt; 0.5q</td><td class="l2">L2로 변경</td><td>r = 0, 25, 49</td></tr>
+</tbody></table></div>
+<p>경계는 엄격한 <code>&lt;</code> 비교입니다. 정확히 0.5q이면 L1이고, 정확히 q이면 L0를 유지합니다. 계수 0.5는 현재 trainer에 하드코딩되어 있으며 학습 함수의 조절 가능한 인자로 노출되어 있지 않습니다.</p>
+<div class="interactive"><strong>경계값 확인 · L0 자식 토큰을 가정</strong><p class="muted">학습 상태 전체를 재현하는 도구가 아니라, 위 조건문의 수치 예시입니다. 기본 byte·특수 토큰은 제외합니다.</p><div class="controls"><label>큐 헤드 빈도 q<br><input id="q" type="number" min="0" step="1" value="100"></label><label>잔여 빈도 r<br><input id="r" type="number" min="0" step="1" value="49"></label></div><output id="verdict" aria-live="polite">q = 100, r = 49 → L2</output><noscript><p>JavaScript 없이도 위 표에서 경계값을 확인할 수 있습니다.</p></noscript></div>
+<div class="caution"><strong>최종 어휘 전체가 위 식으로 항상 정렬되는 것은 아닙니다.</strong> 코드는 매 단계에서 모든 토큰을 다시 분류하지 않고, 방금 병합에 참여한 자식만 검사합니다. 기존 상태와 재활성화 이력도 영향을 줍니다. 따라서 최종 L1/L2를 마지막 Qhead 하나로 다시 계산한 구간으로 해석하면 부정확합니다.</div>
+<p class="source">근거: <a href="../src/hscaffold_bpe/trainer.py">trainer.py:246–269</a>.</p>
+</section>
+<section id="training">
+<h2>04 · 학습 알고리즘과 상태 전이</h2>
+<ol>
+<li><strong>초기화:</strong> 기본 byte 256개와 특수 토큰을 L0로 고정합니다. pretoken별 byte 시퀀스에서 토큰 빈도·인접 쌍 빈도와 쌍이 등장하는 위치를 집계합니다.</li>
+<li><strong>큐에서 다음 항목 선택:</strong> 유효한 최고 빈도 항목을 꺼냅니다. 오래된 빈도나 이미 무효화된 상태의 힙 항목은 버립니다.</li>
+<li><strong>scaffold 토큰 항목이면 재활성화:</strong> 해당 토큰을 L0로 올리고 visible count를 늘린 뒤 다음 반복으로 넘어갑니다. 이 분기에서는 시퀀스를 병합하지 않습니다.</li>
+<li><strong>쌍 항목이면 출력 토큰 확인:</strong> 두 자식의 bytes를 이어 붙입니다. 새 토큰이면 L0로 추가합니다. 같은 bytes의 기존 scaffold 토큰이면 L0로 재활성화한 뒤 다음 반복으로 넘어가는 별도 분기가 있습니다.</li>
+<li><strong>병합과 빈도 갱신:</strong> 진행 가능한 쌍의 병합 이력을 기록하고, 해당 쌍이 있는 학습 시퀀스에서 왼쪽부터 겹치지 않게 병합합니다. 인접 쌍 통계와 토큰 잔여 빈도를 갱신합니다.</li>
+<li><strong>자식 상태 갱신:</strong> 이미 scaffold인 자식의 유효한 잔여 빈도를 큐에 반영한 뒤 Qhead를 읽습니다. 기본 byte·특수 토큰을 제외한 두 자식에 L1/L2 판정을 적용합니다.</li>
+<li><strong>종료:</strong> L0 개수가 목표 어휘 크기에 도달할 때까지 반복합니다. L1/L2로 내릴 때 L0 개수가 줄기 때문에 확장 어휘는 목표 크기보다 클 수 있습니다.</li>
+</ol>
+<pre><code># 분류 부분을 중심으로 정리한 의사코드
+실제 병합 및 빈도 갱신
+기존 scaffold 자식의 갱신된 양수 빈도를 Q에 삽입
+q = 유효한 Qhead의 빈도  # 유효 항목이 없으면 0
+
+for child in {left, right} - 기본 byte/특수 토큰:
+    if level[child] == 0 and f(child) &lt; q:
+        level[child] = 2 if f(child) &lt; 0.5*q else 1
+        visible_count -= 1
+        if f(child) &gt; 0:
+            Q에 child 삽입
+    elif level[child] == 1 and f(child) &lt; 0.5*q:
+        level[child] = 2</code></pre>
+<p>기존 L1은 조건에 따라 L2로 내려갈 수 있습니다. 반대로 빈도 비율만 보고 L2를 L1로 올리는 분기는 없습니다. L1/L2는 큐에서 선택되거나 기존 scaffold 출력 토큰을 다시 활성화하는 경로를 통해 L0로 복귀할 수 있습니다.</p>
+<p>두 자식이 같은 토큰인 병합에서는 동일 빈도 카운터를 두 번 차감합니다. 예를 들어 <code>(a,a) → aa</code> 한 번은 a 두 개를 소비하기 때문입니다. 쌍 빈도에는 겹친 인접 쌍이 포함될 수 있으므로, 잔여 빈도의 차감에는 실제로 적용한 비중첩 병합 횟수를 사용합니다.</p>
+<p class="source">근거: trainer.py:98–113, 149–157, 184–269.</p>
+</section>
+<section id="encoding">
+<h2>05 · 인코딩의 다섯 단계</h2>
+<div class="flow"><div class="step"><b>① 입력 준비</b><span>특수 토큰 구간 분리<br>정규식 pretokenization<br>UTF-8 bytes</span></div><div class="step"><b>② 전체 병합</b><span>L0/L1/L2를 모두 이용하여 긴 토큰 구성</span></div><div class="step"><b>③ L2 분해</b><span>남아 있는 L2를 L0/L1 자식 열로 변환</span></div><div class="step"><b>④ 제한 재병합</b><span>L0/L1을 출력하는 규칙만으로 BPE 재실행</span></div><div class="step"><b>⑤ L1 분해</b><span>남은 L1을 L0 자식 열로 변환하고 모델 ID로 매핑</span></div></div>
+<pre><code>sequence = BPE(bytes, max_output_level=2)
+
+early = concat(demolish(token, max_level=1) for token in sequence)
+sequence = BPE(early, max_output_level=1)
+
+final = concat(demolish(token, max_level=0) for token in sequence)
+return map_to_model_ids(final)</code></pre>
+<p><strong>“L2를 먼저 분해한다”는 첫 BPE 전에 제거한다는 뜻이 아닙니다.</strong> 첫 BPE에서는 L2도 더 긴 토큰을 만드는 데 사용할 수 있습니다. 그 과정이 끝났을 때 독립 토큰으로 남은 L2만 L1보다 먼저 분해합니다.</p>
+<p>이미 L2를 재료로 만들어진 L0 토큰은 그대로 유지합니다. 분해 함수는 현재 토큰의 level이 허용 범위이면 즉시 반환하므로, L0 내부에 과거 L2 구성요소가 있었다는 이유로 병합 이력을 거슬러 올라가 분해하지 않습니다.</p>
+<p>두 번째 BPE가 끝난 후 L1을 분해하며, <strong>그 뒤에 세 번째 BPE는 없습니다.</strong> 인코딩 도중 입력 텍스트의 빈도를 다시 세어 level을 바꾸지도 않습니다. 학습 모델에 저장된 level을 사용합니다.</p>
+<p class="source">근거: tokenizer.py:100–136, 148–161. 위 의사코드는 Python 경로의 핵심이며 백엔드별 구간 처리는 07절에서 구분합니다.</p>
+</section>
+<section id="demolish">
+<h2>06 · 분해 알고리즘의 정확한 의미</h2>
+<p><code>_demolish_token(token_id, max_level)</code>은 현재 토큰이 허용 level 이하면 그대로 반환합니다. 허용되지 않는 토큰이면 <code>parents</code>에 저장된 각 자식 쌍을 재귀적으로 분해합니다.</p>
+<pre><code>demolish(t, k):
+    if level[t] &lt;= k:
+        return [t]
+    candidates = []
+    for (left, right) in parents[t]:
+        candidates.append(demolish(left,k) + demolish(right,k))
+    return min(candidates, key=(조각 수, 내부 ID 열))</code></pre>
+<ul><li><strong>L2 분해:</strong> k=1이므로 L0/L1에 도달하면 멈춥니다.</li><li><strong>최종 분해:</strong> k=0이므로 L0에 도달할 때까지 분해합니다.</li><li><strong>복수 경로 선택:</strong> 저장된 자식 경로들 중 결과 조각 수가 최소인 것을 선택합니다. 길이가 같으면 내부 ID 열의 사전순으로 결정합니다.</li><li><strong>캐시:</strong> 토큰 ID와 허용 level별 결과를 캐시하여 반복 분해 비용을 줄입니다.</li><li><strong>오류:</strong> 분해해야 하는 scaffold에 저장된 자식 경로가 없으면 예외가 발생합니다.</li></ul>
+<div class="note">여기서 “최소 조각 수”는 <strong>저장된 병합 이력으로 도달할 수 있는 분해들 중 최소</strong>입니다. 전체 vocabulary를 이용해 가능한 모든 byte 경계 분할을 탐색하는 전역 최적화가 아닙니다. 분해 경로를 선택할 때 주변 토큰과의 향후 재병합 결과도 미리 평가하지 않습니다.</div>
+<p class="source">근거: tokenizer.py:100–111, trainer.py:210–211.</p>
+</section>
+<section id="remerge">
+<h2>07 · 재병합 순위와 주변 탐색 범위</h2>
+<h3>고정된 좌우 윈도는 없다</h3>
+<p><code>_apply_bpe</code>는 전달받은 시퀀스의 모든 인접 쌍을 검사합니다. 저장된 병합 규칙이 있고, 출력 토큰 level이 허용 범위인 후보 중 학습 병합 순위가 가장 빠른 쌍을 선택합니다. 선택한 쌍의 비중첩 출현들을 왼쪽부터 병합하고, 바뀐 시퀀스를 다시 검사합니다.</p>
+<p>새로운 인접 쌍을 계속 만들 수 있으므로 병합 영향은 여러 토큰에 걸쳐 연쇄적으로 이어질 수 있습니다. 하지만 떨어진 토큰을 건너뛰어 합치거나, 학습에 없는 병합 규칙을 새로 만들지는 않습니다. 인코딩 시점의 출현 빈도나 의미적 유사도도 순위 기준이 아닙니다.</p>
+<div class="note"><strong>“재병합을 한 번 더”의 의미:</strong> 인접 쌍을 딱 한 번 합치거나 한 번 훑고 끝내는 것이 아닙니다. L0/L1을 출력하는 허용 병합이 더 이상 없을 때까지 BPE 루프 한 차례를 완료합니다.</div>
+<h3>백엔드에 따른 구간 차이</h3>
+<div class="table-wrap"><table><thead><tr><th>항목</th><th>Python reference</th><th>tiktoken 고속 경로</th></tr></thead><tbody>
+<tr><td>선택</td><td><code>backend="python"</code></td><td><code>auto</code>에서 tiktoken을 import할 수 있으면 사용</td></tr>
+<tr><td>첫 병합</td><td>정규식 pretoken마다 Python BPE</td><td>같은 정규식을 설정한 tiktoken의 <code>encode_ordinary</code></td></tr>
+<tr><td>첫 병합의 rank 표현</td><td><code>model.merges</code> 순서, 동일 쌍은 최초 기록</td><td>특수 토큰을 제외한 내부 ID 정렬 순서로 byte 문자열 rank 구성</td></tr>
+<tr><td>L2 분해·재병합 범위</td><td>pretoken 하나씩 처리</td><td>특수 토큰으로 분리된 일반 텍스트 구간의 토큰 열 전체</td></tr>
+<tr><td>재병합 함수</td><td colspan="2">동일한 Python <code>_apply_bpe(..., max_output_level=1)</code></td></tr>
+</tbody></table></div>
+<p>고속 경로는 첫 병합 이후 pretoken별 경계 정보를 전달하지 않고, 일반 텍스트 구간의 결과를 한 시퀀스로 분해·재병합합니다. 따라서 재병합 함수는 pretoken 경계에 놓인 인접 쌍도 검사할 수 있습니다. 특수 토큰 경계는 <code>encode()</code>가 따로 구분하므로 넘지 않습니다.</p>
+<div class="caution"><strong>확인된 사실과 검증할 문제를 구분해야 합니다.</strong> 두 경로의 재병합 입력 범위가 다른 것은 코드로 확인됩니다. 그러나 경계에서 실제 병합하려면 해당 쌍의 허용 병합 규칙이 존재해야 합니다. 범위 차이만으로 결과 불일치가 발생했다고 단정할 수 없습니다. 동일하게 첫 병합의 rank 구성 방식 차이도 모든 모델에서 동등한지는 별도로 확인해야 합니다.</div>
+<p class="source">근거: tokenizer.py:15–17, 29–52, 67–98, 113–161.</p>
+</section>
+<section id="example">
+<h2>08 · 단계별 예시</h2>
+<p class="muted">아래 토큰과 규칙은 작동 원리를 보여 주기 위한 가상 예시입니다. 저장된 실험 모델에서 추출한 실제 인코딩 결과가 아닙니다.</p>
+<h3>분해된 조각이 기존 이웃과 합쳐지는 경우</h3>
+<pre><code>가정:
+  X = uv, X는 L2
+  A, u, v, B는 L0
+  (A,u) → Au, (v,B) → vB 규칙이 있으며 Au, vB도 L0
+
+① 첫 BPE의 결과             [ A | X(L2) | B ]
+② 남은 L2를 분해            [ A | u | v | B ]
+③ L0/L1 출력만 허용해 재병합  [ Au | vB ]
+④ 남은 L1이 없으므로 출력     [ Au | vB ]</code></pre>
+<p>L2였던 X의 내부 조각 u와 v만 다시 보는 것이 아닙니다. u는 왼쪽 A와, v는 오른쪽 B와 병합될 수 있습니다. 원래 <code>(u,v) → X</code> 규칙은 출력이 L2이므로 두 번째 BPE에서 금지됩니다.</p>
+<h3>L1은 마지막까지 중간 조각으로 남을 수 있다</h3>
+<pre><code>첫 BPE 결과:       [ X(L2) ]
+X의 저장된 자식:    [ Y(L1), z(L0) ]
+Y의 저장된 자식:    [ a(L0), b(L0) ]
+
+L2 분해:          [ Y, z ]       # Y는 여기서 유지
+제한 재병합:       [ Y, z ]       # 허용된 병합이 없다고 가정
+최종 L1 분해:      [ a, b, z ]    # 이후 추가 BPE 없음</code></pre>
+<p>이처럼 L2를 L0까지 무조건 분해하는 것은 아닙니다. 먼저 L0/L1까지만 풀고 재병합 기회를 준 다음, 마지막에 L1을 제거합니다.</p>
+</section>
+<section id="validation">
+<h2>09 · 검증 범위와 미확정 사항</h2>
+<p><span class="tag">코드 확인</span><span class="tag">기존 테스트 9개 통과</span>2026-10-07 검토에서 프로젝트 가상환경으로 <code>.venv/bin/pytest -q</code>를 실행했고 기존 테스트 9개가 통과했습니다. 이 문서 작성을 위해 학습이나 모델 재생성은 수행하지 않았습니다.</p>
+<div class="table-wrap"><table><thead><tr><th>기존 테스트가 확인하는 항목</th><th>범위</th></tr></thead><tbody>
+<tr><td>저장·로드, encode/decode 복원, 어휘 크기</td><td>작은 합성 코퍼스로 학습한 세 variant</td></tr><tr><td>최종 출력에 scaffold가 없는지</td><td>hierarchical의 출력 내부 ID가 모두 L0인지 확인</td></tr><tr><td>확장 어휘와 snapshot 크기</td><td>작은 목표 어휘 크기에서 검증</td></tr><tr><td>tiktoken / Python 결과 일치</td><td>세 variant에 대해 지정된 소수의 예제 문자열 비교</td></tr>
+</tbody></table></div>
+<h3>팀과 합의해야 할 설계 질문</h3>
+<ol><li><strong>α=0.5의 지위:</strong> 최종 채택한 값인지, 임시 실험값인지? 선정 근거와 다른 경계값 비교 결과가 있는지?</li><li><strong>조기 분해의 시점:</strong> “전체 BPE 완료 후 잔여 L2 분해”가 의도인지? 병합 도중 L2를 즉시 분해하려는 구상과는 다릅니다.</li><li><strong>재병합의 범위:</strong> pretoken 내부로 제한할지, 일반 텍스트 구간 전체를 대상으로 할지? 두 백엔드의 범위를 일치시킬지?</li><li><strong>level 갱신 정책:</strong> 병합 자식만 검사하고 L1→L2 및 scaffold→L0 경로를 두는 현재 정책이 의도한 계층 동작인지?</li><li><strong>분해 대안 선택:</strong> 병합 이력 안에서 최소 조각 수를 택하고 ID로 동률을 해소하는 규칙이 충분한지? 주변 재병합까지 고려하는 최적화가 필요한지?</li></ol>
+<h3>추가 검증으로 구분할 수 있는 문제</h3>
+<ul><li>경계값 바로 아래·정확히 경계·바로 위의 분류와, L1→L2·L2→L0 재활성화 경로를 직접 검증합니다.</li><li>한글·다국어·축약형·숫자·공백·기호·특수 토큰 경계에서 실제 32K/64K 모델의 두 백엔드 결과를 비교합니다.</li><li>여러 분해 경로와 동률 사례에서 최소 분해 규칙을 확인합니다.</li><li>α를 바꾸는 실험, 재병합을 제거한 실험, 같은 scaffold 표시를 사용한 실험을 분리하여 효과를 측정합니다. 이러한 실험은 현재 문서에서 수행한 결과가 아니라 제안입니다.</li></ul>
+<p>측정 지표는 최종 토큰 수·fertility, bytes/token, 인코딩 처리량, 확장 어휘 크기와 level별 분포, LM의 bits-per-byte 등을 함께 보는 것이 좋습니다. 입력 토큰 체계가 달라질 수 있으므로 token-level perplexity 수치 하나만으로 tokenizer 간 우열을 결론 내리지 않아야 합니다.</p>
+<div class="note"><strong>설계 해석의 한계:</strong> L1과 L2 모두 visible vocabulary에서 제외됩니다. 따라서 “L2로 나눈 것 자체가 L1보다 vocabulary 자리를 더 절약한다”는 설명은 부정확합니다. 계층 구분은 분해 시점과 허용 재병합 경로를 바꾸며, 현재 코드는 기존 L1을 L2로 내리는 조건도 추가합니다. 성능 차이의 원인은 통제 실험으로 확인해야 합니다.</div>
+</section>
+<section id="sources">
+<h2>10 · 코드·논문 참조</h2>
+<p>아래 줄 번호는 2026-10-07 확인한 코드 기준입니다. 코드가 변경되면 위치와 동작을 다시 확인해야 합니다. 로컬 링크는 이 HTML을 현재 docs 폴더에서 열 때의 상대 경로입니다.</p>
+<div class="table-wrap"><table><thead><tr><th>참조</th><th>주요 위치</th><th>내용</th></tr></thead><tbody>
+<tr><td><a href="../README.md">README.md</a></td><td>13–27</td><td>H-Scaffold의 프로젝트 정의</td></tr>
+<tr><td><a href="../src/hscaffold_bpe/trainer.py">trainer.py</a></td><td>62–95 / 184–269</td><td>유효 큐 항목 처리, 재활성화, 병합 및 level 분류</td></tr>
+<tr><td><a href="../src/hscaffold_bpe/tokenizer.py">tokenizer.py</a></td><td>15–52 / 67–161</td><td>rank 구성, 반복 병합, 재귀 분해, 백엔드별 경로</td></tr>
+<tr><td><a href="../src/hscaffold_bpe/model.py">model.py</a></td><td>17–79</td><td>모델 구조, visible ID와 저장 metadata</td></tr>
+<tr><td><a href="../src/hscaffold_bpe/pretokenize.py">pretokenize.py</a></td><td>12–29</td><td>GPT-2 정규식과 UTF-8 byte 표현</td></tr>
+<tr><td><a href="../tests/test_tokenizer.py">test_tokenizer.py</a></td><td>20–63</td><td>기존 검증의 실제 범위</td></tr>
+<tr><td><a href="../scripts/run_tokenizers.sh">run_tokenizers.sh</a></td><td>전체</td><td>세 variant와 32K/64K 학습 실행 설정</td></tr>
+<tr><td><a href="https://ojs.aaai.org/index.php/AAAI/article/download/34633/36788">Scaffold-BPE 원 논문 · AAAI 2025</a></td><td>§3, Algorithm 1·2</td><td>원래 scaffold 판정 및 전체 병합 후 분해 알고리즘</td></tr>
+</tbody></table></div>
+<p class="muted">현재 소스의 0.5 규칙은 확인했지만, 기존 모델 파일에 α나 코드 revision이 별도 metadata로 저장되는 구조는 아닙니다. 따라서 이 문서만으로 과거 모든 artifact가 현재 코드와 동일한 조건에서 생성되었다는 provenance까지 증명하지는 않습니다.</p>
+</section>
+</main>
+<footer>H-Scaffold-BPE · 소스 기반 방법론 문서 · 외부 라이브러리 없이 열 수 있는 단일 HTML</footer>
+<script>
+(()=>{const q=document.getElementById('q'),r=document.getElementById('r'),out=document.getElementById('verdict');function update(){const a=Number(q.value),b=Number(r.value);if(q.value===''||r.value===''||!Number.isInteger(a)||!Number.isInteger(b)||a<0||b<0){out.textContent='0 이상의 정수 빈도를 입력하세요.';return;}const level=b>=a?0:b<0.5*a?2:1;out.className='l'+level;out.textContent=`q = ${a}, r = ${b}, 0.5q = ${0.5*a} → L${level}${level===0?' 유지':''}`;}q.addEventListener('input',update);r.addEventListener('input',update);update();})();
+</script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "run": "llama-3.2-1b-hierarchical-32768",
+  "test_binary": "/home/jovyan/main-workspace/yerin/tokenizer/artifacts/tokens/hierarchical-32768-test.bin",
+  "batch_size": 8,
+  "sequence_length": 1024,
+  "attention_implementation": "kernels-community/flash-attn",
+  "precision": "bf16",
+  "wall_seconds": 111.1224250588566,
+  "test": {
+    "nll_per_token": 8.313824373133043,
+    "perplexity": 4079.8861929854183,
+    "bits_per_byte": 2.6594062166772727,
+    "evaluated_tokens": 278528,
+    "estimated_evaluated_bytes": 1256202.247077534
+  }
+}

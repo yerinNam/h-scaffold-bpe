@@ -1,0 +1,16 @@
+{
+  "run": "llama-3.2-1b-bpe-32768",
+  "test_binary": "/home/jovyan/main-workspace/yerin/tokenizer/artifacts/tokens/bpe-32768-test.bin",
+  "batch_size": 8,
+  "sequence_length": 1024,
+  "attention_implementation": "kernels-community/flash-attn",
+  "precision": "bf16",
+  "wall_seconds": 111.01198937557638,
+  "test": {
+    "nll_per_token": 8.238735437393188,
+    "perplexity": 3784.751225885266,
+    "bits_per_byte": 2.6479700866949063,
+    "evaluated_tokens": 278528,
+    "estimated_evaluated_bytes": 1250232.7811239834
+  }
+}

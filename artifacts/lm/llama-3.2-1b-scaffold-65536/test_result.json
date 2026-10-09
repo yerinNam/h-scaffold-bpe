@@ -1,0 +1,16 @@
+{
+  "run": "llama-3.2-1b-scaffold-65536",
+  "test_binary": "/home/jovyan/main-workspace/yerin/tokenizer/artifacts/tokens/scaffold-65536-test.bin",
+  "batch_size": 8,
+  "sequence_length": 1024,
+  "attention_implementation": "kernels-community/flash-attn",
+  "precision": "bf16",
+  "wall_seconds": 49.37829076498747,
+  "test": {
+    "nll_per_token": 8.276087760925293,
+    "perplexity": 3928.7938954363167,
+    "bits_per_byte": 2.5304087168222176,
+    "evaluated_tokens": 270336,
+    "estimated_evaluated_bytes": 1275595.0780582468
+  }
+}

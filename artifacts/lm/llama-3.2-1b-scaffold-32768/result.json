@@ -1,0 +1,24 @@
+{
+  "architecture": "llama-3.2-1b",
+  "train_binary": "artifacts/tokens/scaffold-32768-train.bin",
+  "validation_binary": "artifacts/tokens/scaffold-32768-validation.bin",
+  "parameter_count": 1040254976,
+  "epochs_requested": 5,
+  "steps_planned": 36175,
+  "steps_completed": 36175,
+  "micro_batch_size": 16,
+  "gradient_accumulation": 1,
+  "gradient_checkpointing": false,
+  "attention_implementation": "kernels-community/flash-attn",
+  "optimizer": "adamw_bnb_8bit",
+  "sequence_length": 1024,
+  "precision": "bf16 compute / fp32 master parameters and optimizer",
+  "wall_seconds": 8083.047320431098,
+  "validation": {
+    "nll_per_token": 8.209599666359011,
+    "perplexity": 3676.0705169558596,
+    "bits_per_byte": 2.589274371603235,
+    "evaluated_tokens": 247808,
+    "estimated_evaluated_bytes": 1133531.9571249236
+  }
+}

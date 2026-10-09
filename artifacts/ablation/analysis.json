@@ -1,0 +1,2579 @@
+[
+  {
+    "vocab": 32768,
+    "threshold": 0.25,
+    "l2_count": 1322,
+    "l1_count": 1279,
+    "expanded_vocab": 35369,
+    "mean_l2_bytes": 5.976550680786687,
+    "traits": {
+      "leading_space": 468,
+      "alphabetic": 1309,
+      "numeric": 8,
+      "suffix_shape": 70,
+      "capitalized_candidate": 185,
+      "contains_symbol": 5
+    },
+    "fertility_mean": 1.1991805631615404,
+    "domain_fertility": {
+      "wikitext103_test": 1.1607096813800724,
+      "wmt17_de_en_test_en": 1.1498035660320338,
+      "blimp_all": 1.2870284420725153
+    },
+    "wiki_pretokens": 247230,
+    "affected_pretokens": 180,
+    "l2_occurrences": 180,
+    "remerge_events": 26,
+    "crossing_events": 24,
+    "top_l2": [
+      {
+        "token": "␠Provision",
+        "count": 9
+      },
+      {
+        "token": "␠charg",
+        "count": 6
+      },
+      {
+        "token": "math",
+        "count": 5
+      },
+      {
+        "token": "thor",
+        "count": 5
+      },
+      {
+        "token": "␠Guatem",
+        "count": 5
+      },
+      {
+        "token": "␠Wander",
+        "count": 5
+      },
+      {
+        "token": "␠overw",
+        "count": 4
+      },
+      {
+        "token": "␠rif",
+        "count": 4
+      },
+      {
+        "token": "␠197",
+        "count": 4
+      },
+      {
+        "token": "␠earl",
+        "count": 4
+      },
+      {
+        "token": "␠Brune",
+        "count": 4
+      },
+      {
+        "token": "auth",
+        "count": 4
+      },
+      {
+        "token": "␠unpre",
+        "count": 3
+      },
+      {
+        "token": "assador",
+        "count": 3
+      },
+      {
+        "token": "␠kilomet",
+        "count": 3
+      },
+      {
+        "token": "ovina",
+        "count": 3
+      },
+      {
+        "token": "enaries",
+        "count": 2
+      },
+      {
+        "token": "reci",
+        "count": 2
+      },
+      {
+        "token": "raul",
+        "count": 2
+      },
+      {
+        "token": "␠avail",
+        "count": 2
+      }
+    ],
+    "top_suffix_shape": [
+      {
+        "token": "ilarly",
+        "count": 1
+      },
+      {
+        "token": "munition",
+        "count": 1
+      },
+      {
+        "token": "fortunately",
+        "count": 1
+      }
+    ],
+    "top_capitalized": [
+      {
+        "token": "␠Provision",
+        "count": 9
+      },
+      {
+        "token": "␠Guatem",
+        "count": 5
+      },
+      {
+        "token": "␠Wander",
+        "count": 5
+      },
+      {
+        "token": "␠Brune",
+        "count": 4
+      },
+      {
+        "token": "␠Prepar",
+        "count": 2
+      },
+      {
+        "token": "␠Agric",
+        "count": 2
+      },
+      {
+        "token": "␠Bahá",
+        "count": 2
+      },
+      {
+        "token": "␠Malays",
+        "count": 2
+      },
+      {
+        "token": "␠Achie",
+        "count": 1
+      },
+      {
+        "token": "␠Guth",
+        "count": 1
+      },
+      {
+        "token": "␠Ports",
+        "count": 1
+      },
+      {
+        "token": "␠Offic",
+        "count": 1
+      },
+      {
+        "token": "␠Congreg",
+        "count": 1
+      }
+    ],
+    "top_remerged": [
+      {
+        "token": "orax",
+        "count": 5
+      },
+      {
+        "token": "roth",
+        "count": 5
+      },
+      {
+        "token": "␠Hide",
+        "count": 2
+      },
+      {
+        "token": "␠Gam",
+        "count": 2
+      },
+      {
+        "token": "ruct",
+        "count": 2
+      },
+      {
+        "token": "innings",
+        "count": 2
+      },
+      {
+        "token": "ailed",
+        "count": 1
+      },
+      {
+        "token": "␠Cov",
+        "count": 1
+      },
+      {
+        "token": "omp",
+        "count": 1
+      },
+      {
+        "token": "yled",
+        "count": 1
+      },
+      {
+        "token": "␠Jug",
+        "count": 1
+      },
+      {
+        "token": "␠conced",
+        "count": 1
+      },
+      {
+        "token": "rust",
+        "count": 1
+      },
+      {
+        "token": "rend",
+        "count": 1
+      }
+    ],
+    "top_crossing": [
+      {
+        "token": "orax",
+        "count": 5
+      },
+      {
+        "token": "roth",
+        "count": 5
+      },
+      {
+        "token": "␠Hide",
+        "count": 2
+      },
+      {
+        "token": "␠Gam",
+        "count": 2
+      },
+      {
+        "token": "ruct",
+        "count": 2
+      },
+      {
+        "token": "innings",
+        "count": 2
+      },
+      {
+        "token": "ailed",
+        "count": 1
+      },
+      {
+        "token": "␠Cov",
+        "count": 1
+      },
+      {
+        "token": "yled",
+        "count": 1
+      },
+      {
+        "token": "␠Jug",
+        "count": 1
+      },
+      {
+        "token": "␠conced",
+        "count": 1
+      },
+      {
+        "token": "rust",
+        "count": 1
+      }
+    ],
+    "examples": [
+      {
+        "pretoken": "␠Gerrothorax",
+        "count": 5,
+        "expanded": "␠Ger | ro | thor | ax",
+        "early": "␠Ger | ro | th | or | ax",
+        "remerged": "␠Ger | roth | orax"
+      },
+      {
+        "pretoken": "␠Hideo",
+        "count": 2,
+        "expanded": "␠H | ideo",
+        "early": "␠H | ide | o",
+        "remerged": "␠Hide | o"
+      },
+      {
+        "pretoken": "␠Gameplay",
+        "count": 2,
+        "expanded": "␠G | ameplay",
+        "early": "␠G | am | ep | lay",
+        "remerged": "␠Gam | ep | lay"
+      },
+      {
+        "pretoken": "␠destructible",
+        "count": 2,
+        "expanded": "␠destr | uct | ible",
+        "early": "␠dest | r | uct | ible",
+        "remerged": "␠dest | ruct | ible"
+      },
+      {
+        "pretoken": "␠winnings",
+        "count": 2,
+        "expanded": "␠winn | ings",
+        "early": "␠w | inn | ings",
+        "remerged": "␠w | innings"
+      },
+      {
+        "pretoken": "␠availed",
+        "count": 1,
+        "expanded": "␠avail | ed",
+        "early": "␠av | ail | ed",
+        "remerged": "␠av | ailed"
+      },
+      {
+        "pretoken": "␠Covina",
+        "count": 1,
+        "expanded": "␠C | ovina",
+        "early": "␠C | ov | ina",
+        "remerged": "␠Cov | ina"
+      },
+      {
+        "pretoken": "␠accompanies",
+        "count": 1,
+        "expanded": "␠accomp | anies",
+        "early": "␠acc | om | p | anies",
+        "remerged": "␠acc | omp | anies"
+      },
+      {
+        "pretoken": "␠cotyledon",
+        "count": 1,
+        "expanded": "␠c | ot | y | ledon",
+        "early": "␠c | ot | y | led | on",
+        "remerged": "␠c | ot | yled | on"
+      },
+      {
+        "pretoken": "␠Jugoslavenska",
+        "count": 1,
+        "expanded": "␠J | ugoslav | ens | ka",
+        "early": "␠J | ug | oslav | ens | ka",
+        "remerged": "␠Jug | oslav | ens | ka"
+      },
+      {
+        "pretoken": "␠concedes",
+        "count": 1,
+        "expanded": "␠con | cedes",
+        "early": "␠con | ced | es",
+        "remerged": "␠conced | es"
+      },
+      {
+        "pretoken": "␠entrust",
+        "count": 1,
+        "expanded": "␠entr | ust",
+        "early": "␠ent | r | ust",
+        "remerged": "␠ent | rust"
+      }
+    ],
+    "csv": "l2-t025-32768.csv"
+  },
+  {
+    "vocab": 32768,
+    "threshold": 0.5,
+    "l2_count": 2118,
+    "l1_count": 483,
+    "expanded_vocab": 35369,
+    "mean_l2_bytes": 5.838999055712937,
+    "traits": {
+      "alphabetic": 2101,
+      "leading_space": 783,
+      "numeric": 8,
+      "suffix_shape": 120,
+      "capitalized_candidate": 362,
+      "contains_symbol": 9
+    },
+    "fertility_mean": 1.1989735857530148,
+    "domain_fertility": {
+      "wikitext103_test": 1.1606155483250455,
+      "wmt17_de_en_test_en": 1.1495769114536114,
+      "blimp_all": 1.2867282974803873
+    },
+    "wiki_pretokens": 247230,
+    "affected_pretokens": 466,
+    "l2_occurrences": 467,
+    "remerge_events": 51,
+    "crossing_events": 48,
+    "top_l2": [
+      {
+        "token": "␠Rif",
+        "count": 38
+      },
+      {
+        "token": "␠Dü",
+        "count": 25
+      },
+      {
+        "token": "␠Murd",
+        "count": 9
+      },
+      {
+        "token": "␠Provision",
+        "count": 9
+      },
+      {
+        "token": "␠descend",
+        "count": 8
+      },
+      {
+        "token": "perors",
+        "count": 7
+      },
+      {
+        "token": "␠charg",
+        "count": 6
+      },
+      {
+        "token": "math",
+        "count": 5
+      },
+      {
+        "token": "␠rept",
+        "count": 5
+      },
+      {
+        "token": "thor",
+        "count": 5
+      },
+      {
+        "token": "␠Guatem",
+        "count": 5
+      },
+      {
+        "token": "inness",
+        "count": 5
+      },
+      {
+        "token": "␠Phel",
+        "count": 5
+      },
+      {
+        "token": "␠Wander",
+        "count": 5
+      },
+      {
+        "token": "␠overw",
+        "count": 4
+      },
+      {
+        "token": "␠rif",
+        "count": 4
+      },
+      {
+        "token": "␠197",
+        "count": 4
+      },
+      {
+        "token": "␠precurs",
+        "count": 4
+      },
+      {
+        "token": "phoon",
+        "count": 4
+      },
+      {
+        "token": "stitu",
+        "count": 4
+      }
+    ],
+    "top_suffix_shape": [
+      {
+        "token": "inness",
+        "count": 5
+      },
+      {
+        "token": "ulnerable",
+        "count": 2
+      },
+      {
+        "token": "ecially",
+        "count": 1
+      },
+      {
+        "token": "sequently",
+        "count": 1
+      },
+      {
+        "token": "icularly",
+        "count": 1
+      },
+      {
+        "token": "ointment",
+        "count": 1
+      },
+      {
+        "token": "ilarly",
+        "count": 1
+      },
+      {
+        "token": "munition",
+        "count": 1
+      },
+      {
+        "token": "oining",
+        "count": 1
+      },
+      {
+        "token": "arriers",
+        "count": 1
+      },
+      {
+        "token": "osion",
+        "count": 1
+      },
+      {
+        "token": "fortunately",
+        "count": 1
+      },
+      {
+        "token": "ployed",
+        "count": 1
+      },
+      {
+        "token": "essment",
+        "count": 1
+      },
+      {
+        "token": "viated",
+        "count": 1
+      }
+    ],
+    "top_capitalized": [
+      {
+        "token": "␠Rif",
+        "count": 38
+      },
+      {
+        "token": "␠Dü",
+        "count": 25
+      },
+      {
+        "token": "␠Murd",
+        "count": 9
+      },
+      {
+        "token": "␠Provision",
+        "count": 9
+      },
+      {
+        "token": "␠Guatem",
+        "count": 5
+      },
+      {
+        "token": "␠Phel",
+        "count": 5
+      },
+      {
+        "token": "␠Wander",
+        "count": 5
+      },
+      {
+        "token": "␠Brune",
+        "count": 4
+      },
+      {
+        "token": "␠Surviv",
+        "count": 3
+      },
+      {
+        "token": "Jos",
+        "count": 3
+      },
+      {
+        "token": "␠Wrest",
+        "count": 3
+      },
+      {
+        "token": "␠Prepar",
+        "count": 2
+      },
+      {
+        "token": "␠Nickel",
+        "count": 2
+      },
+      {
+        "token": "␠Agric",
+        "count": 2
+      },
+      {
+        "token": "␠Bahá",
+        "count": 2
+      }
+    ],
+    "top_remerged": [
+      {
+        "token": "orax",
+        "count": 5
+      },
+      {
+        "token": "roth",
+        "count": 5
+      },
+      {
+        "token": "uming",
+        "count": 4
+      },
+      {
+        "token": "␠Hide",
+        "count": 2
+      },
+      {
+        "token": "␠Prec",
+        "count": 2
+      },
+      {
+        "token": "NH",
+        "count": 2
+      },
+      {
+        "token": "␠Verd",
+        "count": 2
+      },
+      {
+        "token": "␠Gam",
+        "count": 2
+      },
+      {
+        "token": "ruct",
+        "count": 2
+      },
+      {
+        "token": "innings",
+        "count": 2
+      },
+      {
+        "token": "␠mast",
+        "count": 1
+      },
+      {
+        "token": "ailed",
+        "count": 1
+      },
+      {
+        "token": "dig",
+        "count": 1
+      },
+      {
+        "token": "␠refer",
+        "count": 1
+      },
+      {
+        "token": "Dev",
+        "count": 1
+      },
+      {
+        "token": "estro",
+        "count": 1
+      },
+      {
+        "token": "oan",
+        "count": 1
+      },
+      {
+        "token": "xy",
+        "count": 1
+      },
+      {
+        "token": "␠Ish",
+        "count": 1
+      },
+      {
+        "token": "␠hy",
+        "count": 1
+      }
+    ],
+    "top_crossing": [
+      {
+        "token": "orax",
+        "count": 5
+      },
+      {
+        "token": "roth",
+        "count": 5
+      },
+      {
+        "token": "uming",
+        "count": 4
+      },
+      {
+        "token": "␠Hide",
+        "count": 2
+      },
+      {
+        "token": "␠Prec",
+        "count": 2
+      },
+      {
+        "token": "NH",
+        "count": 2
+      },
+      {
+        "token": "␠Verd",
+        "count": 2
+      },
+      {
+        "token": "␠Gam",
+        "count": 2
+      },
+      {
+        "token": "ruct",
+        "count": 2
+      },
+      {
+        "token": "innings",
+        "count": 2
+      },
+      {
+        "token": "␠mast",
+        "count": 1
+      },
+      {
+        "token": "ailed",
+        "count": 1
+      },
+      {
+        "token": "dig",
+        "count": 1
+      },
+      {
+        "token": "Dev",
+        "count": 1
+      },
+      {
+        "token": "estro",
+        "count": 1
+      },
+      {
+        "token": "oan",
+        "count": 1
+      },
+      {
+        "token": "xy",
+        "count": 1
+      },
+      {
+        "token": "␠Ish",
+        "count": 1
+      },
+      {
+        "token": "␠hy",
+        "count": 1
+      },
+      {
+        "token": "␠Coin",
+        "count": 1
+      }
+    ],
+    "examples": [
+      {
+        "pretoken": "␠Gerrothorax",
+        "count": 5,
+        "expanded": "␠Ger | ro | thor | ax",
+        "early": "␠Ger | ro | th | or | ax",
+        "remerged": "␠Ger | roth | orax"
+      },
+      {
+        "pretoken": "␠consuming",
+        "count": 3,
+        "expanded": "␠consum | ing",
+        "early": "␠cons | um | ing",
+        "remerged": "␠cons | uming"
+      },
+      {
+        "pretoken": "␠Hideo",
+        "count": 2,
+        "expanded": "␠H | ideo",
+        "early": "␠H | ide | o",
+        "remerged": "␠Hide | o"
+      },
+      {
+        "pretoken": "␠Precipitation",
+        "count": 2,
+        "expanded": "␠Pre | cip | itation",
+        "early": "␠Pre | c | ip | itation",
+        "remerged": "␠Prec | ip | itation"
+      },
+      {
+        "pretoken": "␠CONH",
+        "count": 2,
+        "expanded": "␠CON | H",
+        "early": "␠CO | N | H",
+        "remerged": "␠CO | NH"
+      },
+      {
+        "pretoken": "␠Verdict",
+        "count": 2,
+        "expanded": "␠Ver | dict",
+        "early": "␠Ver | d | ict",
+        "remerged": "␠Verd | ict"
+      },
+      {
+        "pretoken": "␠Gameplay",
+        "count": 2,
+        "expanded": "␠G | ameplay",
+        "early": "␠G | am | ep | lay",
+        "remerged": "␠Gam | ep | lay"
+      },
+      {
+        "pretoken": "␠destructible",
+        "count": 2,
+        "expanded": "␠destr | uct | ible",
+        "early": "␠dest | r | uct | ible",
+        "remerged": "␠dest | ruct | ible"
+      },
+      {
+        "pretoken": "␠winnings",
+        "count": 2,
+        "expanded": "␠winn | ings",
+        "early": "␠w | inn | ings",
+        "remerged": "␠w | innings"
+      },
+      {
+        "pretoken": "␠mastery",
+        "count": 1,
+        "expanded": "␠m | astery",
+        "early": "␠m | ast | ery",
+        "remerged": "␠mast | ery"
+      },
+      {
+        "pretoken": "␠availed",
+        "count": 1,
+        "expanded": "␠avail | ed",
+        "early": "␠av | ail | ed",
+        "remerged": "␠av | ailed"
+      },
+      {
+        "pretoken": "␠prodigious",
+        "count": 1,
+        "expanded": "␠pro | d | igious",
+        "early": "␠pro | d | ig | ious",
+        "remerged": "␠pro | dig | ious"
+      }
+    ],
+    "csv": "l2-t050-32768.csv"
+  },
+  {
+    "vocab": 32768,
+    "threshold": 0.75,
+    "l2_count": 2477,
+    "l1_count": 124,
+    "expanded_vocab": 35369,
+    "mean_l2_bytes": 5.780783205490513,
+    "traits": {
+      "alphabetic": 2460,
+      "leading_space": 931,
+      "numeric": 8,
+      "suffix_shape": 152,
+      "capitalized_candidate": 454,
+      "contains_symbol": 9
+    },
+    "fertility_mean": 1.1989212205537927,
+    "domain_fertility": {
+      "wikitext103_test": 1.1604886733378355,
+      "wmt17_de_en_test_en": 1.149546690843155,
+      "blimp_all": 1.2867282974803873
+    },
+    "wiki_pretokens": 247230,
+    "affected_pretokens": 627,
+    "l2_occurrences": 633,
+    "remerge_events": 78,
+    "crossing_events": 72,
+    "top_l2": [
+      {
+        "token": "␠Rif",
+        "count": 38
+      },
+      {
+        "token": "␠Dü",
+        "count": 25
+      },
+      {
+        "token": "phib",
+        "count": 17
+      },
+      {
+        "token": "fax",
+        "count": 14
+      },
+      {
+        "token": "␠Murd",
+        "count": 9
+      },
+      {
+        "token": "␠Provision",
+        "count": 9
+      },
+      {
+        "token": "␠descend",
+        "count": 8
+      },
+      {
+        "token": "␠trem",
+        "count": 7
+      },
+      {
+        "token": "perors",
+        "count": 7
+      },
+      {
+        "token": "␠phylogen",
+        "count": 6
+      },
+      {
+        "token": "deacon",
+        "count": 6
+      },
+      {
+        "token": "␠charg",
+        "count": 6
+      },
+      {
+        "token": "thia",
+        "count": 6
+      },
+      {
+        "token": "math",
+        "count": 5
+      },
+      {
+        "token": "␠rept",
+        "count": 5
+      },
+      {
+        "token": "thor",
+        "count": 5
+      },
+      {
+        "token": "␠Guatem",
+        "count": 5
+      },
+      {
+        "token": "inness",
+        "count": 5
+      },
+      {
+        "token": "␠Phel",
+        "count": 5
+      },
+      {
+        "token": "␠Wander",
+        "count": 5
+      }
+    ],
+    "top_suffix_shape": [
+      {
+        "token": "inness",
+        "count": 5
+      },
+      {
+        "token": "ulnerable",
+        "count": 2
+      },
+      {
+        "token": "utely",
+        "count": 2
+      },
+      {
+        "token": "mediately",
+        "count": 2
+      },
+      {
+        "token": "imately",
+        "count": 2
+      },
+      {
+        "token": "leted",
+        "count": 2
+      },
+      {
+        "token": "ecially",
+        "count": 1
+      },
+      {
+        "token": "etically",
+        "count": 1
+      },
+      {
+        "token": "sequently",
+        "count": 1
+      },
+      {
+        "token": "icularly",
+        "count": 1
+      },
+      {
+        "token": "ointment",
+        "count": 1
+      },
+      {
+        "token": "initely",
+        "count": 1
+      },
+      {
+        "token": "ilarly",
+        "count": 1
+      },
+      {
+        "token": "munition",
+        "count": 1
+      },
+      {
+        "token": "oining",
+        "count": 1
+      }
+    ],
+    "top_capitalized": [
+      {
+        "token": "␠Rif",
+        "count": 38
+      },
+      {
+        "token": "␠Dü",
+        "count": 25
+      },
+      {
+        "token": "␠Murd",
+        "count": 9
+      },
+      {
+        "token": "␠Provision",
+        "count": 9
+      },
+      {
+        "token": "␠Guatem",
+        "count": 5
+      },
+      {
+        "token": "␠Phel",
+        "count": 5
+      },
+      {
+        "token": "␠Wander",
+        "count": 5
+      },
+      {
+        "token": "␠Brune",
+        "count": 4
+      },
+      {
+        "token": "␠Surviv",
+        "count": 3
+      },
+      {
+        "token": "Jos",
+        "count": 3
+      },
+      {
+        "token": "␠Wrest",
+        "count": 3
+      },
+      {
+        "token": "␠Prepar",
+        "count": 2
+      },
+      {
+        "token": "␠Pitch",
+        "count": 2
+      },
+      {
+        "token": "␠Giac",
+        "count": 2
+      },
+      {
+        "token": "␠Nickel",
+        "count": 2
+      }
+    ],
+    "top_remerged": [
+      {
+        "token": "␠amph",
+        "count": 10
+      },
+      {
+        "token": "␠Amph",
+        "count": 9
+      },
+      {
+        "token": "orax",
+        "count": 5
+      },
+      {
+        "token": "roth",
+        "count": 5
+      },
+      {
+        "token": "uming",
+        "count": 4
+      },
+      {
+        "token": "␠Surv",
+        "count": 3
+      },
+      {
+        "token": "␠Hide",
+        "count": 2
+      },
+      {
+        "token": "itching",
+        "count": 2
+      },
+      {
+        "token": "␠Prec",
+        "count": 2
+      },
+      {
+        "token": "NH",
+        "count": 2
+      },
+      {
+        "token": "␠Verd",
+        "count": 2
+      },
+      {
+        "token": "␠Gam",
+        "count": 2
+      },
+      {
+        "token": "ruct",
+        "count": 2
+      },
+      {
+        "token": "innings",
+        "count": 2
+      },
+      {
+        "token": "␠mast",
+        "count": 1
+      },
+      {
+        "token": "ailed",
+        "count": 1
+      },
+      {
+        "token": "dig",
+        "count": 1
+      },
+      {
+        "token": "␠refer",
+        "count": 1
+      },
+      {
+        "token": "Dev",
+        "count": 1
+      },
+      {
+        "token": "Bro",
+        "count": 1
+      }
+    ],
+    "top_crossing": [
+      {
+        "token": "␠amph",
+        "count": 10
+      },
+      {
+        "token": "␠Amph",
+        "count": 9
+      },
+      {
+        "token": "orax",
+        "count": 5
+      },
+      {
+        "token": "roth",
+        "count": 5
+      },
+      {
+        "token": "uming",
+        "count": 4
+      },
+      {
+        "token": "␠Hide",
+        "count": 2
+      },
+      {
+        "token": "itching",
+        "count": 2
+      },
+      {
+        "token": "␠Prec",
+        "count": 2
+      },
+      {
+        "token": "NH",
+        "count": 2
+      },
+      {
+        "token": "␠Verd",
+        "count": 2
+      },
+      {
+        "token": "␠Gam",
+        "count": 2
+      },
+      {
+        "token": "ruct",
+        "count": 2
+      },
+      {
+        "token": "innings",
+        "count": 2
+      },
+      {
+        "token": "␠mast",
+        "count": 1
+      },
+      {
+        "token": "ailed",
+        "count": 1
+      },
+      {
+        "token": "dig",
+        "count": 1
+      },
+      {
+        "token": "Dev",
+        "count": 1
+      },
+      {
+        "token": "Bro",
+        "count": 1
+      },
+      {
+        "token": "estro",
+        "count": 1
+      },
+      {
+        "token": "oan",
+        "count": 1
+      }
+    ],
+    "examples": [
+      {
+        "pretoken": "␠amphibian",
+        "count": 6,
+        "expanded": "␠am | phib | ian",
+        "early": "␠am | ph | ib | ian",
+        "remerged": "␠amph | ib | ian"
+      },
+      {
+        "pretoken": "␠Gerrothorax",
+        "count": 5,
+        "expanded": "␠Ger | ro | thor | ax",
+        "early": "␠Ger | ro | th | or | ax",
+        "remerged": "␠Ger | roth | orax"
+      },
+      {
+        "pretoken": "␠Survivors",
+        "count": 3,
+        "expanded": "␠Surviv | ors",
+        "early": "␠Sur | v | iv | ors",
+        "remerged": "␠Surv | iv | ors"
+      },
+      {
+        "pretoken": "␠consuming",
+        "count": 3,
+        "expanded": "␠consum | ing",
+        "early": "␠cons | um | ing",
+        "remerged": "␠cons | uming"
+      },
+      {
+        "pretoken": "␠amphibamids",
+        "count": 2,
+        "expanded": "␠am | phib | am | ids",
+        "early": "␠am | ph | ib | am | ids",
+        "remerged": "␠amph | ib | am | ids"
+      },
+      {
+        "pretoken": "␠Amphibia",
+        "count": 2,
+        "expanded": "␠Am | phib | ia",
+        "early": "␠Am | ph | ib | ia",
+        "remerged": "␠Amph | ib | ia"
+      },
+      {
+        "pretoken": "␠Amphibamus",
+        "count": 2,
+        "expanded": "␠Am | phib | amus",
+        "early": "␠Am | ph | ib | amus",
+        "remerged": "␠Amph | ib | amus"
+      },
+      {
+        "pretoken": "␠Amphibamidae",
+        "count": 2,
+        "expanded": "␠Am | phib | am | idae",
+        "early": "␠Am | ph | ib | am | idae",
+        "remerged": "␠Amph | ib | am | idae"
+      },
+      {
+        "pretoken": "␠amphibamid",
+        "count": 2,
+        "expanded": "␠am | phib | am | id",
+        "early": "␠am | ph | ib | am | id",
+        "remerged": "␠amph | ib | am | id"
+      },
+      {
+        "pretoken": "␠Hideo",
+        "count": 2,
+        "expanded": "␠H | ideo",
+        "early": "␠H | ide | o",
+        "remerged": "␠Hide | o"
+      },
+      {
+        "pretoken": "␠Pitching",
+        "count": 2,
+        "expanded": "␠Pitch | ing",
+        "early": "␠P | itch | ing",
+        "remerged": "␠P | itching"
+      },
+      {
+        "pretoken": "␠Amphibious",
+        "count": 2,
+        "expanded": "␠Am | phibious",
+        "early": "␠Am | ph | ib | ious",
+        "remerged": "␠Amph | ib | ious"
+      }
+    ],
+    "csv": "l2-t075-32768.csv"
+  },
+  {
+    "vocab": 65536,
+    "threshold": 0.25,
+    "l2_count": 2595,
+    "l1_count": 2294,
+    "expanded_vocab": 70425,
+    "mean_l2_bytes": 6.144123314065511,
+    "traits": {
+      "alphabetic": 2586,
+      "leading_space": 892,
+      "suffix_shape": 161,
+      "capitalized_candidate": 464,
+      "contains_symbol": 9
+    },
+    "fertility_mean": 1.1330752878352017,
+    "domain_fertility": {
+      "wikitext103_test": 1.109300755110811,
+      "wmt17_de_en_test_en": 1.1044273194318526,
+      "blimp_all": 1.1854977889629414
+    },
+    "wiki_pretokens": 247230,
+    "affected_pretokens": 103,
+    "l2_occurrences": 103,
+    "remerge_events": 13,
+    "crossing_events": 13,
+    "top_l2": [
+      {
+        "token": "␠Strik",
+        "count": 10
+      },
+      {
+        "token": "␠Brune",
+        "count": 4
+      },
+      {
+        "token": "␠unpre",
+        "count": 3
+      },
+      {
+        "token": "␠fict",
+        "count": 3
+      },
+      {
+        "token": "enaries",
+        "count": 2
+      },
+      {
+        "token": "␠Prepar",
+        "count": 2
+      },
+      {
+        "token": "␠Reconc",
+        "count": 2
+      },
+      {
+        "token": "␠erup",
+        "count": 2
+      },
+      {
+        "token": "␠alco",
+        "count": 2
+      },
+      {
+        "token": "ameplay",
+        "count": 2
+      },
+      {
+        "token": "iminal",
+        "count": 2
+      },
+      {
+        "token": "␠Bahá",
+        "count": 2
+      },
+      {
+        "token": "orescences",
+        "count": 2
+      },
+      {
+        "token": "␠bri",
+        "count": 2
+      },
+      {
+        "token": "usband",
+        "count": 2
+      },
+      {
+        "token": "␠recycl",
+        "count": 2
+      },
+      {
+        "token": "␠destr",
+        "count": 2
+      },
+      {
+        "token": "␠dislik",
+        "count": 1
+      },
+      {
+        "token": "imity",
+        "count": 1
+      },
+      {
+        "token": "ideon",
+        "count": 1
+      }
+    ],
+    "top_suffix_shape": [
+      {
+        "token": "geoning",
+        "count": 1
+      },
+      {
+        "token": "enamed",
+        "count": 1
+      }
+    ],
+    "top_capitalized": [
+      {
+        "token": "␠Strik",
+        "count": 10
+      },
+      {
+        "token": "␠Brune",
+        "count": 4
+      },
+      {
+        "token": "␠Prepar",
+        "count": 2
+      },
+      {
+        "token": "␠Reconc",
+        "count": 2
+      },
+      {
+        "token": "␠Bahá",
+        "count": 2
+      },
+      {
+        "token": "␠Schum",
+        "count": 1
+      },
+      {
+        "token": "␠Afgh",
+        "count": 1
+      },
+      {
+        "token": "␠Guth",
+        "count": 1
+      },
+      {
+        "token": "␠Polynes",
+        "count": 1
+      },
+      {
+        "token": "␠Sains",
+        "count": 1
+      },
+      {
+        "token": "␠Congreg",
+        "count": 1
+      },
+      {
+        "token": "␠Prisc",
+        "count": 1
+      },
+      {
+        "token": "␠Messersch",
+        "count": 1
+      }
+    ],
+    "top_remerged": [
+      {
+        "token": "Hus",
+        "count": 2
+      },
+      {
+        "token": "bands",
+        "count": 2
+      },
+      {
+        "token": "ruct",
+        "count": 2
+      },
+      {
+        "token": "␠Chino",
+        "count": 1
+      },
+      {
+        "token": "rate",
+        "count": 1
+      },
+      {
+        "token": "illation",
+        "count": 1
+      },
+      {
+        "token": "␠Osc",
+        "count": 1
+      },
+      {
+        "token": "usable",
+        "count": 1
+      },
+      {
+        "token": "ifex",
+        "count": 1
+      },
+      {
+        "token": "␠Jug",
+        "count": 1
+      }
+    ],
+    "top_crossing": [
+      {
+        "token": "Hus",
+        "count": 2
+      },
+      {
+        "token": "bands",
+        "count": 2
+      },
+      {
+        "token": "ruct",
+        "count": 2
+      },
+      {
+        "token": "␠Chino",
+        "count": 1
+      },
+      {
+        "token": "rate",
+        "count": 1
+      },
+      {
+        "token": "illation",
+        "count": 1
+      },
+      {
+        "token": "␠Osc",
+        "count": 1
+      },
+      {
+        "token": "usable",
+        "count": 1
+      },
+      {
+        "token": "ifex",
+        "count": 1
+      },
+      {
+        "token": "␠Jug",
+        "count": 1
+      }
+    ],
+    "examples": [
+      {
+        "pretoken": "Husbands",
+        "count": 2,
+        "expanded": "H | usband | s",
+        "early": "H | us | band | s",
+        "remerged": "Hus | bands"
+      },
+      {
+        "pretoken": "␠destructible",
+        "count": 2,
+        "expanded": "␠destr | uct | ible",
+        "early": "␠dest | r | uct | ible",
+        "remerged": "␠dest | ruct | ible"
+      },
+      {
+        "pretoken": "␠Chinoiserie",
+        "count": 1,
+        "expanded": "␠Ch | inois | erie",
+        "early": "␠Ch | ino | is | erie",
+        "remerged": "␠Chino | is | erie"
+      },
+      {
+        "pretoken": "␠administrate",
+        "count": 1,
+        "expanded": "␠administr | ate",
+        "early": "␠adm | inist | r | ate",
+        "remerged": "␠adm | inist | rate"
+      },
+      {
+        "pretoken": "␠Oscillation",
+        "count": 1,
+        "expanded": "␠O | scill | ation",
+        "early": "␠O | sc | ill | ation",
+        "remerged": "␠Osc | illation"
+      },
+      {
+        "pretoken": "␠unusable",
+        "count": 1,
+        "expanded": "␠unus | able",
+        "early": "␠un | us | able",
+        "remerged": "␠un | usable"
+      },
+      {
+        "pretoken": "␠artifex",
+        "count": 1,
+        "expanded": "␠artif | ex",
+        "early": "␠art | if | ex",
+        "remerged": "␠art | ifex"
+      },
+      {
+        "pretoken": "␠Jugoslavenska",
+        "count": 1,
+        "expanded": "␠J | ugoslav | ens | ka",
+        "early": "␠J | ug | oslav | ens | ka",
+        "remerged": "␠Jug | oslav | ens | ka"
+      }
+    ],
+    "csv": "l2-t025-65536.csv"
+  },
+  {
+    "vocab": 65536,
+    "threshold": 0.5,
+    "l2_count": 3988,
+    "l1_count": 901,
+    "expanded_vocab": 70425,
+    "mean_l2_bytes": 6.013540621865597,
+    "traits": {
+      "alphabetic": 3965,
+      "leading_space": 1435,
+      "suffix_shape": 245,
+      "capitalized_candidate": 806,
+      "contains_symbol": 23
+    },
+    "fertility_mean": 1.1330451708110563,
+    "domain_fertility": {
+      "wikitext103_test": 1.109255734954059,
+      "wmt17_de_en_test_en": 1.104381988516168,
+      "blimp_all": 1.1854977889629414
+    },
+    "wiki_pretokens": 247230,
+    "affected_pretokens": 247,
+    "l2_occurrences": 248,
+    "remerge_events": 24,
+    "crossing_events": 23,
+    "top_l2": [
+      {
+        "token": "␠Britann",
+        "count": 11
+      },
+      {
+        "token": "␠Strik",
+        "count": 10
+      },
+      {
+        "token": "␠Murd",
+        "count": 9
+      },
+      {
+        "token": "␠vertebra",
+        "count": 5
+      },
+      {
+        "token": "␠plag",
+        "count": 5
+      },
+      {
+        "token": "phans",
+        "count": 4
+      },
+      {
+        "token": "␠gren",
+        "count": 4
+      },
+      {
+        "token": "␠Brune",
+        "count": 4
+      },
+      {
+        "token": "␠unpre",
+        "count": 3
+      },
+      {
+        "token": "␠fict",
+        "count": 3
+      },
+      {
+        "token": "unya",
+        "count": 3
+      },
+      {
+        "token": "iphany",
+        "count": 3
+      },
+      {
+        "token": "␠Chaut",
+        "count": 3
+      },
+      {
+        "token": "␠Assy",
+        "count": 3
+      },
+      {
+        "token": "␠Kauff",
+        "count": 3
+      },
+      {
+        "token": "enaries",
+        "count": 2
+      },
+      {
+        "token": "ductive",
+        "count": 2
+      },
+      {
+        "token": "␠collaps",
+        "count": 2
+      },
+      {
+        "token": "rypted",
+        "count": 2
+      },
+      {
+        "token": "␠Prepar",
+        "count": 2
+      }
+    ],
+    "top_suffix_shape": [
+      {
+        "token": "rypted",
+        "count": 2
+      },
+      {
+        "token": "ocused",
+        "count": 1
+      },
+      {
+        "token": "oused",
+        "count": 1
+      },
+      {
+        "token": "mediately",
+        "count": 1
+      },
+      {
+        "token": "aneously",
+        "count": 1
+      },
+      {
+        "token": "viously",
+        "count": 1
+      },
+      {
+        "token": "akening",
+        "count": 1
+      },
+      {
+        "token": "panied",
+        "count": 1
+      },
+      {
+        "token": "geoning",
+        "count": 1
+      },
+      {
+        "token": "enamed",
+        "count": 1
+      }
+    ],
+    "top_capitalized": [
+      {
+        "token": "␠Britann",
+        "count": 11
+      },
+      {
+        "token": "␠Strik",
+        "count": 10
+      },
+      {
+        "token": "␠Murd",
+        "count": 9
+      },
+      {
+        "token": "␠Brune",
+        "count": 4
+      },
+      {
+        "token": "␠Chaut",
+        "count": 3
+      },
+      {
+        "token": "␠Assy",
+        "count": 3
+      },
+      {
+        "token": "␠Kauff",
+        "count": 3
+      },
+      {
+        "token": "␠Prepar",
+        "count": 2
+      },
+      {
+        "token": "␠Reconc",
+        "count": 2
+      },
+      {
+        "token": "␠Bahá",
+        "count": 2
+      },
+      {
+        "token": "Roche",
+        "count": 1
+      },
+      {
+        "token": "␠Schum",
+        "count": 1
+      },
+      {
+        "token": "␠Afgh",
+        "count": 1
+      },
+      {
+        "token": "Wrest",
+        "count": 1
+      },
+      {
+        "token": "␠Hammers",
+        "count": 1
+      }
+    ],
+    "top_remerged": [
+      {
+        "token": "yak",
+        "count": 3
+      },
+      {
+        "token": "␠Gam",
+        "count": 2
+      },
+      {
+        "token": "Hus",
+        "count": 2
+      },
+      {
+        "token": "bands",
+        "count": 2
+      },
+      {
+        "token": "ruct",
+        "count": 2
+      },
+      {
+        "token": "␠Qa",
+        "count": 1
+      },
+      {
+        "token": "mines",
+        "count": 1
+      },
+      {
+        "token": "␠Chino",
+        "count": 1
+      },
+      {
+        "token": "rate",
+        "count": 1
+      },
+      {
+        "token": "illation",
+        "count": 1
+      },
+      {
+        "token": "␠Osc",
+        "count": 1
+      },
+      {
+        "token": "ordin",
+        "count": 1
+      },
+      {
+        "token": "usable",
+        "count": 1
+      },
+      {
+        "token": "ersk",
+        "count": 1
+      },
+      {
+        "token": "rites",
+        "count": 1
+      },
+      {
+        "token": "ifex",
+        "count": 1
+      },
+      {
+        "token": "␠Jug",
+        "count": 1
+      },
+      {
+        "token": "pic",
+        "count": 1
+      }
+    ],
+    "top_crossing": [
+      {
+        "token": "yak",
+        "count": 3
+      },
+      {
+        "token": "␠Gam",
+        "count": 2
+      },
+      {
+        "token": "Hus",
+        "count": 2
+      },
+      {
+        "token": "bands",
+        "count": 2
+      },
+      {
+        "token": "ruct",
+        "count": 2
+      },
+      {
+        "token": "␠Qa",
+        "count": 1
+      },
+      {
+        "token": "mines",
+        "count": 1
+      },
+      {
+        "token": "␠Chino",
+        "count": 1
+      },
+      {
+        "token": "rate",
+        "count": 1
+      },
+      {
+        "token": "illation",
+        "count": 1
+      },
+      {
+        "token": "␠Osc",
+        "count": 1
+      },
+      {
+        "token": "usable",
+        "count": 1
+      },
+      {
+        "token": "ersk",
+        "count": 1
+      },
+      {
+        "token": "rites",
+        "count": 1
+      },
+      {
+        "token": "ifex",
+        "count": 1
+      },
+      {
+        "token": "␠Jug",
+        "count": 1
+      },
+      {
+        "token": "pic",
+        "count": 1
+      }
+    ],
+    "examples": [
+      {
+        "pretoken": "␠Assyakirin",
+        "count": 3,
+        "expanded": "␠Assy | ak | irin",
+        "early": "␠Ass | y | ak | irin",
+        "remerged": "␠Ass | yak | irin"
+      },
+      {
+        "pretoken": "␠Gameplay",
+        "count": 2,
+        "expanded": "␠G | ameplay",
+        "early": "␠G | am | ep | lay",
+        "remerged": "␠Gam | ep | lay"
+      },
+      {
+        "pretoken": "Husbands",
+        "count": 2,
+        "expanded": "H | usband | s",
+        "early": "H | us | band | s",
+        "remerged": "Hus | bands"
+      },
+      {
+        "pretoken": "␠destructible",
+        "count": 2,
+        "expanded": "␠destr | uct | ible",
+        "early": "␠dest | r | uct | ible",
+        "remerged": "␠dest | ruct | ible"
+      },
+      {
+        "pretoken": "␠Qaeda",
+        "count": 1,
+        "expanded": "␠Q | aeda",
+        "early": "␠Q | a | eda",
+        "remerged": "␠Qa | eda"
+      },
+      {
+        "pretoken": "␠undermines",
+        "count": 1,
+        "expanded": "␠underm | ines",
+        "early": "␠under | m | ines",
+        "remerged": "␠under | mines"
+      },
+      {
+        "pretoken": "␠Chinoiserie",
+        "count": 1,
+        "expanded": "␠Ch | inois | erie",
+        "early": "␠Ch | ino | is | erie",
+        "remerged": "␠Chino | is | erie"
+      },
+      {
+        "pretoken": "␠administrate",
+        "count": 1,
+        "expanded": "␠administr | ate",
+        "early": "␠adm | inist | r | ate",
+        "remerged": "␠adm | inist | rate"
+      },
+      {
+        "pretoken": "␠Oscillation",
+        "count": 1,
+        "expanded": "␠O | scill | ation",
+        "early": "␠O | sc | ill | ation",
+        "remerged": "␠Osc | illation"
+      },
+      {
+        "pretoken": "␠coordinators",
+        "count": 1,
+        "expanded": "␠coordin | ators",
+        "early": "␠co | ord | in | ators",
+        "remerged": "␠co | ordin | ators"
+      },
+      {
+        "pretoken": "␠unusable",
+        "count": 1,
+        "expanded": "␠unus | able",
+        "early": "␠un | us | able",
+        "remerged": "␠un | usable"
+      },
+      {
+        "pretoken": "␠Hammerskjold",
+        "count": 1,
+        "expanded": "␠Hammers | k | j | old",
+        "early": "␠Hamm | ers | k | j | old",
+        "remerged": "␠Hamm | ersk | j | old"
+      }
+    ],
+    "csv": "l2-t050-65536.csv"
+  },
+  {
+    "vocab": 65536,
+    "threshold": 0.75,
+    "l2_count": 4677,
+    "l1_count": 212,
+    "expanded_vocab": 70425,
+    "mean_l2_bytes": 5.970707718623049,
+    "traits": {
+      "alphabetic": 4649,
+      "leading_space": 1719,
+      "suffix_shape": 287,
+      "capitalized_candidate": 981,
+      "contains_symbol": 28
+    },
+    "fertility_mean": 1.133021793174508,
+    "domain_fertility": {
+      "wikitext103_test": 1.1092393639879674,
+      "wmt17_de_en_test_en": 1.1043366576004836,
+      "blimp_all": 1.1854893579350727
+    },
+    "wiki_pretokens": 247230,
+    "affected_pretokens": 339,
+    "l2_occurrences": 340,
+    "remerge_events": 28,
+    "crossing_events": 26,
+    "top_l2": [
+      {
+        "token": "␠Britann",
+        "count": 11
+      },
+      {
+        "token": "␠Strik",
+        "count": 10
+      },
+      {
+        "token": "␠Murd",
+        "count": 9
+      },
+      {
+        "token": "␠typh",
+        "count": 9
+      },
+      {
+        "token": "␠vertebra",
+        "count": 5
+      },
+      {
+        "token": "␠plag",
+        "count": 5
+      },
+      {
+        "token": "␠hydrox",
+        "count": 5
+      },
+      {
+        "token": "phans",
+        "count": 4
+      },
+      {
+        "token": "ellate",
+        "count": 4
+      },
+      {
+        "token": "␠gren",
+        "count": 4
+      },
+      {
+        "token": "␠Brune",
+        "count": 4
+      },
+      {
+        "token": "␠unpre",
+        "count": 3
+      },
+      {
+        "token": "␠fict",
+        "count": 3
+      },
+      {
+        "token": "egaard",
+        "count": 3
+      },
+      {
+        "token": "unya",
+        "count": 3
+      },
+      {
+        "token": "ancery",
+        "count": 3
+      },
+      {
+        "token": "␠skirm",
+        "count": 3
+      },
+      {
+        "token": "iphany",
+        "count": 3
+      },
+      {
+        "token": "␠fantas",
+        "count": 3
+      },
+      {
+        "token": "␠Chaut",
+        "count": 3
+      }
+    ],
+    "top_suffix_shape": [
+      {
+        "token": "rypted",
+        "count": 2
+      },
+      {
+        "token": "inness",
+        "count": 2
+      },
+      {
+        "token": "itiveness",
+        "count": 2
+      },
+      {
+        "token": "ocused",
+        "count": 1
+      },
+      {
+        "token": "oused",
+        "count": 1
+      },
+      {
+        "token": "ifically",
+        "count": 1
+      },
+      {
+        "token": "mediately",
+        "count": 1
+      },
+      {
+        "token": "ishable",
+        "count": 1
+      },
+      {
+        "token": "iterated",
+        "count": 1
+      },
+      {
+        "token": "aneously",
+        "count": 1
+      },
+      {
+        "token": "viously",
+        "count": 1
+      },
+      {
+        "token": "akening",
+        "count": 1
+      },
+      {
+        "token": "etted",
+        "count": 1
+      },
+      {
+        "token": "panied",
+        "count": 1
+      },
+      {
+        "token": "geoning",
+        "count": 1
+      }
+    ],
+    "top_capitalized": [
+      {
+        "token": "␠Britann",
+        "count": 11
+      },
+      {
+        "token": "␠Strik",
+        "count": 10
+      },
+      {
+        "token": "␠Murd",
+        "count": 9
+      },
+      {
+        "token": "␠Brune",
+        "count": 4
+      },
+      {
+        "token": "␠Chaut",
+        "count": 3
+      },
+      {
+        "token": "␠Assy",
+        "count": 3
+      },
+      {
+        "token": "␠Kauff",
+        "count": 3
+      },
+      {
+        "token": "␠Prepar",
+        "count": 2
+      },
+      {
+        "token": "␠Independ",
+        "count": 2
+      },
+      {
+        "token": "␠Reconc",
+        "count": 2
+      },
+      {
+        "token": "␠Schwarzen",
+        "count": 2
+      },
+      {
+        "token": "␠Bahá",
+        "count": 2
+      },
+      {
+        "token": "␠Liqu",
+        "count": 2
+      },
+      {
+        "token": "Citiz",
+        "count": 1
+      },
+      {
+        "token": "Roche",
+        "count": 1
+      }
+    ],
+    "top_remerged": [
+      {
+        "token": "yak",
+        "count": 3
+      },
+      {
+        "token": "zenberg",
+        "count": 2
+      },
+      {
+        "token": "␠Gam",
+        "count": 2
+      },
+      {
+        "token": "Hus",
+        "count": 2
+      },
+      {
+        "token": "bands",
+        "count": 2
+      },
+      {
+        "token": "ruct",
+        "count": 2
+      },
+      {
+        "token": "cript",
+        "count": 1
+      },
+      {
+        "token": "reng",
+        "count": 1
+      },
+      {
+        "token": "␠Qa",
+        "count": 1
+      },
+      {
+        "token": "mines",
+        "count": 1
+      },
+      {
+        "token": "␠Chino",
+        "count": 1
+      },
+      {
+        "token": "rate",
+        "count": 1
+      },
+      {
+        "token": "illation",
+        "count": 1
+      },
+      {
+        "token": "␠Osc",
+        "count": 1
+      },
+      {
+        "token": "ordin",
+        "count": 1
+      },
+      {
+        "token": "usable",
+        "count": 1
+      },
+      {
+        "token": "ersk",
+        "count": 1
+      },
+      {
+        "token": "rites",
+        "count": 1
+      },
+      {
+        "token": "ifex",
+        "count": 1
+      },
+      {
+        "token": "␠Jug",
+        "count": 1
+      }
+    ],
+    "top_crossing": [
+      {
+        "token": "yak",
+        "count": 3
+      },
+      {
+        "token": "zenberg",
+        "count": 2
+      },
+      {
+        "token": "␠Gam",
+        "count": 2
+      },
+      {
+        "token": "Hus",
+        "count": 2
+      },
+      {
+        "token": "bands",
+        "count": 2
+      },
+      {
+        "token": "ruct",
+        "count": 2
+      },
+      {
+        "token": "reng",
+        "count": 1
+      },
+      {
+        "token": "␠Qa",
+        "count": 1
+      },
+      {
+        "token": "mines",
+        "count": 1
+      },
+      {
+        "token": "␠Chino",
+        "count": 1
+      },
+      {
+        "token": "rate",
+        "count": 1
+      },
+      {
+        "token": "illation",
+        "count": 1
+      },
+      {
+        "token": "␠Osc",
+        "count": 1
+      },
+      {
+        "token": "usable",
+        "count": 1
+      },
+      {
+        "token": "ersk",
+        "count": 1
+      },
+      {
+        "token": "rites",
+        "count": 1
+      },
+      {
+        "token": "ifex",
+        "count": 1
+      },
+      {
+        "token": "␠Jug",
+        "count": 1
+      },
+      {
+        "token": "pic",
+        "count": 1
+      }
+    ],
+    "examples": [
+      {
+        "pretoken": "␠Assyakirin",
+        "count": 3,
+        "expanded": "␠Assy | ak | irin",
+        "early": "␠Ass | y | ak | irin",
+        "remerged": "␠Ass | yak | irin"
+      },
+      {
+        "pretoken": "␠Schwarzenberg",
+        "count": 2,
+        "expanded": "␠Schwarzen | berg",
+        "early": "␠Schwar | zen | berg",
+        "remerged": "␠Schwar | zenberg"
+      },
+      {
+        "pretoken": "␠Gameplay",
+        "count": 2,
+        "expanded": "␠G | ameplay",
+        "early": "␠G | am | ep | lay",
+        "remerged": "␠Gam | ep | lay"
+      },
+      {
+        "pretoken": "Husbands",
+        "count": 2,
+        "expanded": "H | usband | s",
+        "early": "H | us | band | s",
+        "remerged": "Hus | bands"
+      },
+      {
+        "pretoken": "␠destructible",
+        "count": 2,
+        "expanded": "␠destr | uct | ible",
+        "early": "␠dest | r | uct | ible",
+        "remerged": "␠dest | ruct | ible"
+      },
+      {
+        "pretoken": "␠conscript",
+        "count": 1,
+        "expanded": "␠conscript",
+        "early": "␠cons | c | ript",
+        "remerged": "␠cons | cript"
+      },
+      {
+        "pretoken": "␠understrength",
+        "count": 1,
+        "expanded": "␠underst | re | ngth",
+        "early": "␠underst | re | ng | th",
+        "remerged": "␠underst | reng | th"
+      },
+      {
+        "pretoken": "␠Qaeda",
+        "count": 1,
+        "expanded": "␠Q | aeda",
+        "early": "␠Q | a | eda",
+        "remerged": "␠Qa | eda"
+      },
+      {
+        "pretoken": "␠undermines",
+        "count": 1,
+        "expanded": "␠underm | ines",
+        "early": "␠under | m | ines",
+        "remerged": "␠under | mines"
+      },
+      {
+        "pretoken": "␠Chinoiserie",
+        "count": 1,
+        "expanded": "␠Ch | inois | erie",
+        "early": "␠Ch | ino | is | erie",
+        "remerged": "␠Chino | is | erie"
+      },
+      {
+        "pretoken": "␠administrate",
+        "count": 1,
+        "expanded": "␠administr | ate",
+        "early": "␠adm | inist | r | ate",
+        "remerged": "␠adm | inist | rate"
+      },
+      {
+        "pretoken": "␠Oscillation",
+        "count": 1,
+        "expanded": "␠O | scill | ation",
+        "early": "␠O | sc | ill | ation",
+        "remerged": "␠Osc | illation"
+      }
+    ],
+    "csv": "l2-t075-65536.csv"
+  }
+]

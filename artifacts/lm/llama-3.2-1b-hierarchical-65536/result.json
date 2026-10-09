@@ -1,0 +1,24 @@
+{
+  "architecture": "llama-3.2-1b",
+  "train_binary": "artifacts/tokens/hierarchical-65536-train.bin",
+  "validation_binary": "artifacts/tokens/hierarchical-65536-validation.bin",
+  "parameter_count": 1107363840,
+  "epochs_requested": 5,
+  "steps_planned": 34555,
+  "steps_completed": 34555,
+  "micro_batch_size": 16,
+  "gradient_accumulation": 1,
+  "gradient_checkpointing": false,
+  "attention_implementation": "kernels-community/flash-attn",
+  "optimizer": "adamw_bnb_8bit",
+  "sequence_length": 1024,
+  "precision": "bf16 compute / fp32 master parameters and optimizer",
+  "wall_seconds": 8133.432657979429,
+  "validation": {
+    "nll_per_token": 8.167692665396066,
+    "perplexity": 3525.200754994141,
+    "bits_per_byte": 2.462799535077553,
+    "evaluated_tokens": 237568,
+    "estimated_evaluated_bytes": 1136665.8317487973
+  }
+}
